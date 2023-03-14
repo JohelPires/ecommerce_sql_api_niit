@@ -11,7 +11,7 @@ const createProduct = (req, res) => {
 const getAllProducts = (req, res) => {
   //   res.send('all products')
   const name = req.query.name
-  productDao.getAllProducts(name.toLowerCase(), (err, result) => {
+  productDao.getAllProducts(name ? name.toLowerCase() : null, (err, result) => {
     res.json(result)
   })
 }
@@ -23,7 +23,20 @@ const findProductById = (req, res) => {
   })
 }
 
-module.exports = { createProduct, findProductById, getAllProducts }
+const updateProductById = (req, res) => {
+  const id = parseInt(req.params.id)
+  const newData = req.body
+  productDao.updateProductById(id, newData, (err, result) => {
+    res.json(result)
+  })
+}
+
+module.exports = {
+  createProduct,
+  findProductById,
+  getAllProducts,
+  updateProductById,
+}
 // function getAllProducts(req, res) {
 //   res.send('get all products')
 // }
