@@ -24,6 +24,18 @@ const findProductById = (id, done) => {
   })
 }
 
+const deleteProductById = (id, done) => {
+  const query = `DELETE FROM product WHERE id=${id}`
+  sql.query(query, (err, res) => {
+    if (err) {
+      console.log(err)
+      done(err)
+    }
+    console.log(res)
+    done(null, res)
+  })
+}
+
 const getAllProducts = (name, done) => {
   let query = 'SELECT * FROM product'
   if (name) {
@@ -39,7 +51,7 @@ const getAllProducts = (name, done) => {
 }
 const updateProductById = (id, newData, done) => {
   const { name, description, price } = newData
-  console.log(name, description, price)
+  //   console.log(name, description, price)
   // Implementar funcionalidade para inserir apenas um campo
   // const name = newData.name ? `name = ${name}`: ''
   // const description = newData.description ? `description = ${description}`: ''
@@ -60,4 +72,5 @@ module.exports = {
   findProductById,
   getAllProducts,
   updateProductById,
+  deleteProductById,
 }

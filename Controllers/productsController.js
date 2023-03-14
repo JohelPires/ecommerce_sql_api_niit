@@ -23,6 +23,16 @@ const findProductById = (req, res) => {
   })
 }
 
+const deleteProductById = (req, res) => {
+  const id = parseInt(req.params.id)
+  productDao.deleteProductById(id, (err, result) => {
+    if (err) {
+      res.json('ocorreu um erro.')
+    }
+    res.json(result)
+  })
+}
+
 const updateProductById = (req, res) => {
   const id = parseInt(req.params.id)
   const newData = req.body
@@ -36,6 +46,7 @@ module.exports = {
   findProductById,
   getAllProducts,
   updateProductById,
+  deleteProductById,
 }
 // function getAllProducts(req, res) {
 //   res.send('get all products')
