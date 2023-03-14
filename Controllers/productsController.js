@@ -10,7 +10,8 @@ const createProduct = (req, res) => {
 
 const getAllProducts = (req, res) => {
   //   res.send('all products')
-  productDao.getAllProducts((err, result) => {
+  const name = req.query.name
+  productDao.getAllProducts(name.toLowerCase(), (err, result) => {
     res.json(result)
   })
 }

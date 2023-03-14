@@ -24,18 +24,18 @@ findProductById = (id, done) => {
   })
 }
 
-getAllProducts = (done) => {
-  sql.query('SELECT * FROM product', (err, res) => {
+getAllProducts = (name, done) => {
+  let query = 'SELECT * FROM product'
+  if (name) {
+    query += ` WHERE LOWER(name) LIKE '%${name}%'`
+  }
+  sql.query(query, (err, res) => {
     if (err) {
       console.log(err)
       done(err)
     }
     done(null, res)
   })
-}
-
-findProducts = (name, done) => {
-  const query = 'SELECT * FROM product'
 }
 
 module.exports = { createProduct, findProductById, getAllProducts }
